@@ -21,7 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity">
+        <activity android:name=".SecondActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.lsw.task1">
+        </activity>
+        <activity android:name=".ThirdActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.lsw.task1">
         </activity>
     </application>
 
