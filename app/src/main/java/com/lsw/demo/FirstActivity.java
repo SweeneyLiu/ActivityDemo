@@ -1,7 +1,7 @@
 package com.lsw.demo;
 
 import android.content.Intent;
-import android.os.PersistableBundle;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +18,10 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+        if (savedInstanceState != null) {
+            Log.i(TAG, "onCreate:" + savedInstanceState.getString("saveData"));
+        }
+
         mButton = (Button)findViewById(R.id.button1);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,11 +30,30 @@ public class FirstActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Log.i(TAG, "onCreate: "+getTaskId());
+    }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Log.i(TAG, "onConfigurationChanged: ");
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (!(savedInstanceState == null)) {
+            Log.i(TAG, "onRestoreInstanceState: ");
+            Log.i(TAG, "onRestoreInstanceState: " + savedInstanceState.getString("saveData"));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("saveData","test");
         Log.i(TAG, "onSaveInstanceState: ");
     }
 }
