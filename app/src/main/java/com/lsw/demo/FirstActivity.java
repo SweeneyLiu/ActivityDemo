@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends AppCompatActivity implements View.OnClickListener , View.OnLongClickListener{
 
     private Button mButton;
     private static final String TAG = "FirstActivity";
@@ -23,13 +23,15 @@ public class FirstActivity extends AppCompatActivity {
         }
 
         mButton = (Button)findViewById(R.id.button1);
-        mButton.setOnClickListener(new View.OnClickListener() {
+        mButton.setOnClickListener(this);
+        mButton.setOnLongClickListener(this);
+        /*mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         Log.i(TAG, "onCreate: "+getTaskId());
     }
@@ -55,5 +57,16 @@ public class FirstActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putString("saveData","test");
         Log.i(TAG, "onSaveInstanceState: ");
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d(TAG, "onClick: ");
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        Log.i(TAG, "onLongClick: ");
+        return true;
     }
 }
